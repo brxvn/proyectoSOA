@@ -1,0 +1,54 @@
+plugins {
+	id 'java'
+	id 'eclipse'
+}
+
+sourceCompatibility = '8'
+version = '1.0.0'
+
+def AXIS2_VERSION = '1.8.2'
+
+// archiva, artifactory.
+repositories {
+	mavenCentral()
+	mavenLocal()
+}
+
+configurations {
+   all*.exclude group: 'xml-apis'
+}
+
+dependencies {
+	implementation  "org.apache.xmlbeans:xmlbeans:3.1.0"
+	implementation "org.apache.axis2:axis2-transport-local:${AXIS2_VERSION}"
+	implementation	"org.apache.axis2:axis2-transport-http:${AXIS2_VERSION}"
+	implementation "org.apache.axis2:axis2-xmlbeans:${AXIS2_VERSION}"
+	implementation "org.springframework:spring-jdbc:5.3.23"
+	// https://mvnrepository.com/artifact/org.springframework/spring-context-support
+	implementation 'org.springframework:spring-context-support:5.3.23'
+	implementation 'mysql:mysql-connector-java:8.0.26'
+						
+	// https://mvnrepository.com/artifact/org.apache.axis2/axis2-adb
+	implementation "org.apache.axis2:axis2-adb:${AXIS2_VERSION}"
+	//implementation	files("lib/BancoService-test-client.jar")
+	
+    testImplementation 	'org.junit.jupiter:junit-jupiter-api:5.6.2'
+	testImplementation	'org.junit.jupiter:junit-jupiter-engine:5.6.2'
+	// https://mvnrepository.com/artifact/org.junit.platform/junit-platform-commons
+	testImplementation 'org.junit.platform:junit-platform-commons:1.8.2'
+}
+
+test {
+	useJUnitPlatform()
+}
+
+task retrieveRuntimeDependencies(type: Copy) {
+  into "$buildDir/libs"
+  from configurations.runtimeClasspath
+}
+
+// Tarea para copiar temporalmente a una carperta lib las dependencias.
+task copyCompileLibs(type: Copy) {
+    into "libAxis2"
+    from configurations.runtimeClasspath
+}

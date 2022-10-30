@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns="http://proyecto.com" targetNamespace="http://proyecto.com">
+	<wsdl:types>
+		<xs:schema targetNamespace="http://proyecto.com" elementFormDefault="qualified">
+			<xs:include schemaLocation="proyecto.xsd"/>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="ProyectoMessageRequest">
+		<wsdl:part name="parameter" element="tns:RequestProyecto"/>
+	</wsdl:message>
+	<wsdl:message name="ProyectoMessageResponse">
+		<wsdl:part name="parameter" element="tns:ResponseProyecto"/>
+	</wsdl:message>
+	<wsdl:portType name="ProyectoPortType">
+		<wsdl:operation name="ProyectoOperation">
+			<wsdl:input message="tns:ProyectoMessageRequest"/>
+			<wsdl:output message="tns:ProyectoMessageResponse"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="ProyectoBinding" type="tns:ProyectoPortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="ProyectoOperation">
+			<soap:operation soapAction="http://proyecto.com/ProyectoOperation"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="ProyectoService">
+		<wsdl:port name="ProyectoPort" binding="tns:ProyectoBinding">
+			<soap:address location="http://localhost:8080/axis2/services/ProyectoService"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

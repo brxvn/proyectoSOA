@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" targetNamespace="http://proyecto.com" xmlns:tns="http://proyecto.com">
+	<xs:element name="RequestProyecto" type="tns:usuarioType"/>
+	<xs:element name="ResponseProyecto">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="mensaje" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="usuarioType">
+		<xs:sequence>
+			<xs:element name="nombre" type="xs:string"/>
+			<xs:element name="apellido" type="xs:string"/>
+			<xs:element name="username" type="xs:string"/>
+			<xs:element name="password" type="xs:string"/>
+			<xs:element name="disney" type="xs:int"/>
+			<xs:element name="hbomax" type="xs:int"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

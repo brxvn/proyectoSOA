@@ -1,0 +1,22 @@
+# ingoramos archivos creados por defecto al ejecutar los archivos de config
+.classpath
+.gitconfig
+.gradle/
+.project
+.settings/
+bin/
+build/
+lib/
+libAxis2/
+server/
+src/main/resources/schemaorg_apache_xmlbeans/
+
+src/main/java/*
+!/src/main/java/com/
+src/main/java/com/proyecto/*
+
+# nos quedamos con los archivos donde trabajamos con la logica y el dto y dao
+!/src/main/java/com/proyecto/ProyectoServiceImpl.java
+!/src/main/java/com/proyecto/SpringServiceInit.java
+!/src/main/java/com/proyecto/business/
+!/src/main/java/com/springsample/
