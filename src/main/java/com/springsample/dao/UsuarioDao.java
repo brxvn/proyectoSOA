@@ -30,12 +30,14 @@ public class UsuarioDao {
      * @param usuarioDto Usuario a agregar.
      */
     public void add(UsuarioDto usuarioDto) {
-        jdbcTemplate.execute("INSERT INTO users(nombre,apellido,username,password) "
+        jdbcTemplate.execute("INSERT INTO users(nombre,apellido,username,password,disney,hbo) "
         		+ "VALUES("
         		+ "'"+ usuarioDto.getNombre() + "', "
         		+ "'"+ usuarioDto.getApellido() + "', "
         		+ "'"+ usuarioDto.getUsername() + "', "
-        		+ "'" + usuarioDto.getPassword() + "') ");
+        		+ "'"+ usuarioDto.getPassword() + "', "
+        		+ "'"+ usuarioDto.getDisney() + "', "
+        		+ "'" + usuarioDto.getHboMax() + "') ");
     }
     
 //    /**

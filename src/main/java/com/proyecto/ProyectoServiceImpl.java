@@ -28,6 +28,9 @@ public class ProyectoServiceImpl extends ProyectoServiceSkeleton {
 	 * @throws RemoteException 
 	 */
 	public ResponseProyectoDocument proyectoOperation(RequestProyectoDocument requestProyectoDoc) {			
+		String responseString = "";
+		String responseDisney = "";
+		String responseHbo = "";
 		
 		UsuarioType usuario = requestProyectoDoc.getRequestProyecto();
 		UsuarioDto usuarioDto = new UsuarioDto();
@@ -35,13 +38,41 @@ public class ProyectoServiceImpl extends ProyectoServiceSkeleton {
 		usuarioDto.setApellido(usuario.getApellido());
 		usuarioDto.setUsername(usuario.getUsername());	
 		usuarioDto.setPassword(usuario.getPassword());
+		usuarioDto.setDisney(usuario.getDisney());
+		usuarioDto.setHboMax(usuario.getHbomax());
 		
-		
-		String responseString = proyectoBusiness.AddUser(usuarioDto);
-
-
 		ResponseProyectoDocument respDoc = ResponseProyectoDocument.Factory.newInstance();
 		ResponseProyecto response = respDoc.addNewResponseProyecto();
+		
+		//agregamos a la bdd
+		proyectoBusiness.AddUser(usuarioDto);
+		String responseBanco = proyectoBusiness.Cobro(usuarioDto);
+		
+				
+		//si el cobro es exitoso proseguimos
+		if (!responseBanco.equalsIgnoreCase("Cobro Exitoso")) {
+			response.setMensaje(responseBanco);
+			return respDoc;
+		}
+
+		// si llegó con disney y procedemos a llamar al servicio que se encargará de la lógica
+		if (usuario.getDisney() == 1) {
+			//Pagamos disney
+			responseDisney += proyectoBusiness.SubDisney(usuarioDto);
+			System.out.println(responseDisney);
+		}
+		
+		// si llegó con disney y procedemos a llamar al servicio que se encargará de la lógica
+		if (usuario.getHbomax() == 1) {
+			//Pagamos hbo
+			responseHbo += proyectoBusiness.SubHbo(usuarioDto);
+			System.out.println(responseHbo);
+		}
+		
+		responseString = "Respuesta banco: " + responseBanco + "\n" + 
+						"Respuesta disney: " + responseDisney + "\n" +
+						"Respuesta hbo: " + responseHbo;
+		
 		response.setMensaje(responseString);
 
 		return respDoc;

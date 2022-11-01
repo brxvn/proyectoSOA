@@ -13,11 +13,10 @@
             <messageReceiver mep="http://www.w3.org/ns/wsdl/in-out" class="com.proyecto.ProyectoServiceMessageReceiverInOut"/>
         </messageReceivers>
         <parameter name="ServiceClass">com.proyecto.ProyectoServiceImpl</parameter>
-    	<parameter name="ServiceObjectSupplier">
+        <parameter name="ServiceObjectSupplier">
     	org.apache.axis2.extensions.spring.receivers.SpringAppContextAwareObjectSupplier</parameter>
         <parameter name="SpringBeanName">proyectoServiceImpl</parameter>
-		<parameter name="SpringContextLocation">context.xml</parameter>                        
-        
+		<parameter name="SpringContextLocation">context.xml</parameter>
         <parameter name="useOriginalwsdl">true</parameter>
         <parameter name="modifyUserWSDLPortAddress">true</parameter>
         <operation name="ProyectoOperation" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://proyecto.com">

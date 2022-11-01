@@ -30,7 +30,9 @@ dependencies {
 						
 	// https://mvnrepository.com/artifact/org.apache.axis2/axis2-adb
 	implementation "org.apache.axis2:axis2-adb:${AXIS2_VERSION}"
-	//implementation	files("lib/BancoService-test-client.jar")
+	implementation	files("lib/BancoService-test-client.jar")
+	implementation	files("lib/DisneyService-test-client.jar")
+	implementation	files("lib/HboService-test-client.jar")
 	
     testImplementation 	'org.junit.jupiter:junit-jupiter-api:5.6.2'
 	testImplementation	'org.junit.jupiter:junit-jupiter-engine:5.6.2'
